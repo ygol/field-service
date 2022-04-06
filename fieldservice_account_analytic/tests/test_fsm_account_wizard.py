@@ -50,7 +50,7 @@ class FSMAccountAnalyticCase(TransactionCase):
         )
         self.default_account_revenue = self.env["account.account"].search(
             [
-                ("company_id", "=", self.env.user.company_id.id),
+                ("company_id", "=", self.env.company.id),
                 (
                     "user_type_id",
                     "=",
@@ -107,8 +107,8 @@ class FSMAccountAnalyticCase(TransactionCase):
         )
         order._compute_total_cost()
         order._onchange_customer_id_location()
-        self.env.user.company_id.fsm_filter_location_by_contact = True
-        self.env.user.company_id.onchange_fsm_filter_location_by_contact()
+        self.env.company.fsm_filter_location_by_contact = True
+        self.env.company.onchange_fsm_filter_location_by_contact()
         order._onchange_location_id_customer_account()
         self.test_location2.get_default_customer()
         with self.assertRaises(ValidationError):

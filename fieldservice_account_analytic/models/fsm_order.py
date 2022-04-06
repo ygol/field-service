@@ -29,7 +29,7 @@ class FSMOrder(models.Model):
 
     @api.onchange("location_id", "customer_id")
     def _onchange_location_id_customer_account(self):
-        if self.env.user.company_id.fsm_filter_location_by_contact:
+        if self.env.company.fsm_filter_location_by_contact:
             if self.location_id:
                 return {
                     "domain": {

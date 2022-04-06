@@ -14,7 +14,7 @@ class FSMRouteDayRoute(models.Model):
 
     def _default_team_id(self):
         team_ids = self.env["fsm.team"].search(
-            [("company_id", "in", (self.env.user.company_id.id, False))],
+            [("company_id", "in", (self.env.company.id, False))],
             order="sequence asc",
             limit=1,
         )
